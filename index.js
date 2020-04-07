@@ -3,6 +3,7 @@
 /**
  * @file 分析主路径
  */
+const path = require('path');
 const process = require('process');
 const testPath = process.argv[2] || '';
 const exec = require('child_process').exec;
@@ -13,7 +14,9 @@ if (!testPath) {
 }
 if (testPath === 'i' || testPath === 'install') {
     console.log('正在安装依赖...');
-    exec('sh ./shell/install.sh', (err, std, stderr) => {
+    const installPath = path.resolve(__dirname, './shell/install.sh');
+
+    exec(`sh ${installPath}`, (err, std, stderr) => {
         if (!err) {
             console.log(std);
             console.log('安装依赖完成');
@@ -27,7 +30,6 @@ if (testPath === 'i' || testPath === 'install') {
 const {FileSystem} = require('tutils/fileSystem');
 const fsSync = require('tutils/fileSystemSync');
 const fs = new FileSystem();
-const path = require('path');
 const chalk = require('chalk');
 const runPath = process.cwd();
 const astParser = require('./parser');
@@ -122,7 +124,8 @@ console.log(
     chalk.green(`分析结果文件生成成功：${viewDataPath}`)
 );
 console.log(chalk.green('正在启动视图服务...'));
-exec(`sh ./shell/start.sh`, (err, std, stderr) => {
+const startPath = path.resolve(__dirname, './shell/start.sh');
+exec(`sh ${startPath}`, (err, std, stderr) => {
     console.log(chalk.green('启动视图服务成功!'));
     if (!err) {
         console.log(std);
