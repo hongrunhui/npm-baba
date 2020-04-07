@@ -3,13 +3,12 @@
 /**
  * @file 分析主路径
  */
+const process = require('process');
 const testPath = process.argv[2] || '';
-
 const {FileSystem} = require('tutils/fileSystem');
 const fsSync = require('tutils/fileSystemSync');
 const fs = new FileSystem();
 const path = require('path');
-const process = require('process');
 const exec = require('child_process').exec;
 const chalk = require('chalk');
 const runPath = process.cwd();
