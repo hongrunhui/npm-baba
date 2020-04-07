@@ -34,7 +34,7 @@ module.exports = (code) => {
     try {
         const result = babel.transform(code, {
             filename: 'file.ts',
-            dirname: __dirname,
+            cwd: __dirname,
             presets: ["@babel/preset-typescript"],
             plugins: [{
                 visitor: visitor
