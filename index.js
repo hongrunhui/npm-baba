@@ -5,20 +5,10 @@
  */
 const process = require('process');
 const testPath = process.argv[2] || '';
-const {FileSystem} = require('tutils/fileSystem');
-const fsSync = require('tutils/fileSystemSync');
-const fs = new FileSystem();
-const path = require('path');
 const exec = require('child_process').exec;
-const chalk = require('chalk');
-const runPath = process.cwd();
-const astParser = require('./parser');
-// const testPath = path.resolve(runPath, './test/cheerio-1.0.0/index.js');
-// const testPath = path.resolve(runPath, './test/react/src/React.js');
-// const testPath = path.resolve(runPath, './test/mobx-master/src/v4/mobx.ts');
-let uniqueId = new Date().getTime();
+
 if (!testPath) {
-    console.log(chalk.red('请输入入口文件的绝对路径地址'));
+    console.log('请输入入口文件的绝对路径地址');
     return;
 }
 if (testPath === 'i' || testPath === 'install') {
@@ -34,6 +24,18 @@ if (testPath === 'i' || testPath === 'install') {
     });
     return;
 }
+const {FileSystem} = require('tutils/fileSystem');
+const fsSync = require('tutils/fileSystemSync');
+const fs = new FileSystem();
+const path = require('path');
+const chalk = require('chalk');
+const runPath = process.cwd();
+const astParser = require('./parser');
+// const testPath = path.resolve(runPath, './test/cheerio-1.0.0/index.js');
+// const testPath = path.resolve(runPath, './test/react/src/React.js');
+// const testPath = path.resolve(runPath, './test/mobx-master/src/v4/mobx.ts');
+let uniqueId = new Date().getTime();
+
 class Baba {
     constructor() {
         // 关系树🌲
