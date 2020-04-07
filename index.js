@@ -3,6 +3,8 @@
 /**
  * @file 分析主路径
  */
+const testPath = process.argv[2] || '';
+
 const {FileSystem} = require('tutils/fileSystem');
 const fsSync = require('tutils/fileSystemSync');
 const fs = new FileSystem();
@@ -14,7 +16,6 @@ const runPath = process.cwd();
 const astParser = require('./parser');
 // const testPath = path.resolve(runPath, './test/cheerio-1.0.0/index.js');
 // const testPath = path.resolve(runPath, './test/react/src/React.js');
-const testPath = process.argv[2] || '';
 // const testPath = path.resolve(runPath, './test/mobx-master/src/v4/mobx.ts');
 let uniqueId = new Date().getTime();
 if (!testPath) {
@@ -22,14 +23,14 @@ if (!testPath) {
     return;
 }
 if (testPath === 'i' || testPath === 'install') {
-    console.log(chalk.green('正在安装依赖...'));
+    console.log('正在安装依赖...');
     exec('sh ./shell/install.sh', (err, std, stderr) => {
         if (!err) {
             console.log(std);
-            console.log(chalk.green('安装依赖完成'));
+            console.log('安装依赖完成');
         }
         else {
-            console.log(chalk.red('依赖安装失败\n'), err);
+            console.log('依赖安装失败\n', err);
         }
     });
     return;
