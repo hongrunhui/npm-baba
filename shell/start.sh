@@ -1,0 +1,2 @@
+cd view
+yarn start

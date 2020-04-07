@@ -1,0 +1,31 @@
+{
+  "name": "npm-baba",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "baba": "./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "tutils": "^1.6.4",
+    "vue": "^2.6.10",
+    "walk": "^2.3.14"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
+    "babel-types": "^6.26.0",
+    "kill-port": "^1.6.0",
+    "launch-editor": "^2.2.1",
+    "nodejs-websocket": "^1.7.2"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "description": ""
+}

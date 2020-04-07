@@ -1,0 +1,83 @@
+
+.Tree {
+    ul {
+        padding: 0;
+        margin: 0 0 10px 25px;
+        li {
+            list-style-type: none;
+            margin: 0;
+            padding: 10px 5px 0;
+            position: relative;
+        }
+
+        &.hidden {
+            display: none;
+        }
+        .tree-item {
+            .plus {
+                display: none;
+            }
+            .minus {
+                display: inline-block;
+            }
+            &.hidden-ul {
+                .plus {
+                    display: inline-block;
+                }
+                .minus {
+                    display: none;
+                }
+                & > ul {
+                    display: none;
+                }
+            }
+            .tag {
+                &.highlight {
+                    background-color: #f76f77;
+                    color: #fff;
+                }
+                display: inline-block;
+                height: 25px;
+                line-height: 25px;
+                padding: 5px;
+                border-radius: 3px;
+                user-select: none;
+                -webkit-user-select: none;
+                color: #409eff;
+                background: #ecf5ff;
+                border-color: #b3d8ff !important;
+                transition: all 0.3s;
+                &:hover {
+                    color: #fff;
+                    background-color: #409eff;
+                    border-color: #409eff;
+                }
+                .open-file {
+                    display: inline-block;
+                    background-image: url("./images/file-search.png");
+                    background-repeat: no-repeat;
+                    background-size: 15px 15px;
+                    width: 15px;
+                    height: 15px;
+                    vertical-align: middle;
+                    margin-left: 5px;
+                }
+                .npm {
+                    display: inline-block;
+                    margin-left: 5px;
+                    height: 12px;
+                    line-height: 12px;
+                    padding: 2px 5px;
+                    font-size: 12px;
+                    border-radius: 4px;
+                    color: #f56c6c;
+                    background: #fef0f0;
+                    border-color: #fbc4c4;
+                }
+                &.has-child {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
