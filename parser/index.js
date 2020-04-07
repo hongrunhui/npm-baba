@@ -1,7 +1,4 @@
 const babel = require('@babel/core');
-const t = require('babel-types');
-const path  = require('path');
-var a = 1;
 module.exports = (code) => {
     const libs = [];
     const visitor = {
@@ -37,6 +34,7 @@ module.exports = (code) => {
     try {
         const result = babel.transform(code, {
             filename: 'file.ts',
+            dirname: __dirname,
             presets: ["@babel/preset-typescript"],
             plugins: [{
                 visitor: visitor
