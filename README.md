@@ -12,4 +12,4 @@
 
 ### 示例
 
-![](./doc/images/example.gif)
+![](https://github.com/hongrunhui/npm-baba/blob/master/doc/images/example.gif)
