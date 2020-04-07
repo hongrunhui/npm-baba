@@ -16,7 +16,7 @@ if (testPath === 'i' || testPath === 'install') {
     console.log('正在安装依赖...');
     const installPath = path.resolve(__dirname, './shell/install.sh');
 
-    exec(`sh ${installPath}`, (err, std, stderr) => {
+    exec(`sh ${installPath}`, {cwd: __dirname}, (err, std, stderr) => {
         if (!err) {
             console.log(std);
             console.log('安装依赖完成');
@@ -125,7 +125,7 @@ console.log(
 );
 console.log(chalk.green('正在启动视图服务...'));
 const startPath = path.resolve(__dirname, './shell/start.sh');
-exec(`sh ${startPath}`, (err, std, stderr) => {
+exec(`sh ${startPath}`, {cwd: __dirname}, (err, std, stderr) => {
     console.log(chalk.green('启动视图服务成功!'));
     if (!err) {
         console.log(std);
