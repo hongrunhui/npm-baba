@@ -1,5 +1,5 @@
 const babel = require('@babel/core');
-module.exports = (code) => {
+module.exports = (code, fileName = 'file.js') => {
     const libs = [];
     const visitor = {
         ExportDeclaration(p) {
@@ -33,9 +33,9 @@ module.exports = (code) => {
     };
     try {
         const result = babel.transform(code, {
-            filename: 'file.ts',
+            filename: 'file.tsx',
             cwd: __dirname,
-            presets: ["@babel/preset-typescript"],
+            presets: ["@babel/preset-react", "@babel/preset-typescript"],
             plugins: [{
                 visitor: visitor
             }]

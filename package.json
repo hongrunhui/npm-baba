@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "baba": "./index.js"
+    "baba": "./index.js",
+    "mama": "./mama.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,12 +19,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
     "babel-types": "^6.26.0",
     "chalk": "^4.0.0",
     "kill-port": "^1.6.0",
     "launch-editor": "^2.2.1",
-    "nodejs-websocket": "^1.7.2"
+    "nodejs-websocket": "^1.7.2",
+    "react": "^16.13.1"
   },
   "directories": {
     "test": "test"

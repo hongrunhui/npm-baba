@@ -1,8 +1,8 @@
 import * as React from 'react';
 import c from 'classnames';
-import treeData from './data';
+import treeData from './apiData';
 import './Tree.less';
-class Tree extends React.Component {
+class ApiTree extends React.Component {
     state = {
         currentId: -1
     };
@@ -130,4 +130,4 @@ class Tree extends React.Component {
     }
 }
 
-export default Tree;
+export default ApiTree;

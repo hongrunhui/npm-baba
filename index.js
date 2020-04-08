@@ -46,7 +46,7 @@ class Baba {
             children: []
         };
         // 合法文件后缀
-        this.validSuffix = ['.js', '.ts', '.tsx'];
+        this.validSuffix = ['.js', '.ts', '.tsx', '.jsx', '/index.js', '/index.ts', '/index.tsx', '/index.jsx'];
         // 重复依赖缓存，主要用于去重
         this.cache = {};
         console.log(chalk.green('正在分析...'));
@@ -56,11 +56,11 @@ class Baba {
         const entryContent = fsSync.readFile(src, 'utf-8');
         // 分析当前所处文件夹
         const basePath = path.dirname(src);
+        const name = path.basename(src);
         // 分析依赖
-        const deps = astParser(entryContent);
+        const deps = astParser(entryContent, name);
         if (parentNode.name === '开始') {
             // 顶层节点信息修改
-            const name = path.basename(src);
             parentNode.name = name;
             parentNode.src = src;
         }
