@@ -25,6 +25,12 @@ class Tree extends React.Component {
         };
     }
 
+    getNpmName(fileName) {
+        if (fileName) {
+            return fileName.split('/')[0];
+        }
+        return fileName;
+    }
     /**
      * 获取文件名前面一层路径
      * @param src 路径
@@ -84,14 +90,16 @@ class Tree extends React.Component {
                         }
                         <span className={cls}>
                             {node.src && this.getSecondPath(node.src, node.name)}{node.name}
-                            {node.type === 'npm' ? <span className={'npm'}>npm</span> : null}
+                            {node.type === 'npm' ? <a href={`https://www.npmjs.com/package/${this.getNpmName(node.name)}`} target='__blank' className={'npm'}>npm</a> : null}
                             {
-                                <span
+                                node.src && node.type !== 'npm'
+                                && <span
                                     onClick={this.handleOpenFile.bind(this, node.src)}
                                     title="打开文件位置"
                                     className={'open-file'}>
                                 </span>
                             }
+                            {<a href={`https://www.google.com/search?q=${node.name}`} target='__blank' className={'npm'}>search</a>}
                         </span>
                         {
                             this.walkTree(node.children)
@@ -104,12 +112,13 @@ class Tree extends React.Component {
         return vdom;
     }
 
-    handleOpenFile = src => {
+    handleOpenFile = (src, e) => {
+        e.stopPropagation();
         this.ws.send(src);
     };
 
     handleLiClick = (uniqueId, e) => {
-        e.nativeEvent.stopImmediatePropagation();
+        e.stopPropagation();
         this.setState({
             currentId: uniqueId
         });

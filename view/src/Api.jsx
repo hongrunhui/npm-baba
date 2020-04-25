@@ -73,7 +73,7 @@ class ApiTree extends React.Component {
                     <span
                         title={node.src}
                         className={treeItemCls}
-                        onClick={this.handleLiClick.bind(this, node.uniqueId)}>
+                        onClick={this.handleLiClick.bind(this, node)}>
                         {
                             node.children.length > 0
                                 ? <>
@@ -92,6 +92,7 @@ class ApiTree extends React.Component {
                                     className={'open-file'}>
                                 </span>
                             }
+                            {<a href={`https://www.google.com/search?q=${node.name}`} target='__blank' className={'npm'}>search</a>}
                         </span>
                         {
                             this.walkTree(node.children)
@@ -108,11 +109,13 @@ class ApiTree extends React.Component {
         this.ws.send(src);
     };
 
-    handleLiClick = (uniqueId, e) => {
+    handleLiClick = (node, e) => {
+        const {uniqueId} = node;
         e.nativeEvent.stopImmediatePropagation();
         this.setState({
             currentId: uniqueId
         });
+        console.log(node.fn);
         const {currentTarget} = e;
         if (currentTarget.classList.contains('hidden-ul')) {
             currentTarget.classList.remove('hidden-ul')

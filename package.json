@@ -1,6 +1,6 @@
 {
   "name": "npm-baba",
-  "version": "1.0.9",
+  "version": "1.1.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/preset-flow": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
     "babel-types": "^6.26.0",
@@ -26,7 +27,8 @@
     "kill-port": "^1.6.0",
     "launch-editor": "^2.2.1",
     "nodejs-websocket": "^1.7.2",
-    "react": "^16.13.1"
+    "react": "^16.13.1",
+    "webpack": "^4.42.1"
   },
   "directories": {
     "test": "test"

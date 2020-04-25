@@ -52,6 +52,7 @@ class Baba {
         console.log(chalk.green('正在分析...'));
     }
     init(src, parentNode = {}) {
+        const cache = {};
         // 读取文件内容
         const entryContent = fsSync.readFile(src, 'utf-8');
         // 分析当前所处文件夹
@@ -66,7 +67,13 @@ class Baba {
         }
         let finalFilePath = null;
         const walk = lib => {
-            const filePath = path.resolve(basePath, lib);
+            const libName = lib.value;
+            try {
+                path.resolve(basePath, libName)
+            }
+            catch (e) {
+            }
+            const filePath = path.resolve(basePath, libName);
             let isExitFile = fsSync.existsFile(filePath);
             if (isExitFile) {
                 finalFilePath = filePath;
@@ -82,13 +89,6 @@ class Baba {
                 });
             }
             if (finalFilePath) {
-                if (this.cache[finalFilePath]) {
-                    // 已经被缓存过的文件路径，就不再记录
-                    return;
-                }
-                else {
-                    this.cache[finalFilePath] = true;
-                }
                 const name = path.basename(finalFilePath);
                 const node = {
                     name: name,
@@ -98,12 +98,19 @@ class Baba {
                     uniqueId: uniqueId++
                 };
                 parentNode.children.push(node);
-                this.init(finalFilePath, node);
+                if (this.cache[finalFilePath] && this.cache[finalFilePath] > 2) {
+                    // 已经被缓存过的文件路径，就不再记录
+                    return;
+                }
+                else {
+                    this.cache[finalFilePath] = this.cache[finalFilePath] ? ++this.cache[finalFilePath] : 1;
+                    this.init(finalFilePath, node);
+                }
             }
             else {
                 const node = {
-                    name: lib,
-                    type: 'npm',
+                    name: libName,
+                    type: lib.type || 'npm',
                     children: [],
                     uniqueId: uniqueId++
                 };

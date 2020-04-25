@@ -15,9 +15,24 @@ if (!testPath) {
 }
 if (testPath === 'i' || testPath === 'install') {
     console.log('正在安装依赖...');
-    const installPath = path.resolve(__dirname, './shell/installApi.sh');
+    const installPath = path.resolve(__dirname, './shell/install.sh');
 
-    exec(`sh ${installPath} ${installName}`, {cwd: __dirname}, (err, std, stderr) => {
+    exec(`sh ${installPath}`, {cwd: __dirname}, (err, std, stderr) => {
+        if (!err) {
+            console.log(std);
+            console.log('安装依赖完成');
+        }
+        else {
+            console.log('依赖安装失败\n', err);
+        }
+    });
+    return;
+}
+if (/^i-|(^install-)/.test(testPath)) {
+    console.log('正在安装依赖包...');
+    const installPath = path.resolve(__dirname, './shell/installApi.sh');
+    const npmName = testPath.split('-')[1];
+    exec(`sh ${installPath} ${npmName}`, {cwd: __dirname}, (err, std, stderr) => {
         if (!err) {
             console.log(std);
             console.log('安装依赖完成');
@@ -38,7 +53,6 @@ const astParser = require('./parser');
 // const testPath = path.resolve(runPath, './test/react/src/React.js');
 // const testPath = path.resolve(runPath, './test/mobx-master/src/v4/mobx.ts');
 let uniqueId = new Date().getTime();
-
 class Mama {
     constructor() {
 
@@ -53,7 +67,9 @@ class Mama {
         };
         try {
             const packages = require(npmName);
-            apiData = api2html(packages, npmName)
+            apiData = api2html(packages, npmName, {
+                invalidKey: ['CommonsChunkPlugin', 'UglifyJsPlugin', 'optimize']
+            })
         }
         catch (e) {
             if (e.toString().indexOf(' Cannot find module ') > -1) {
